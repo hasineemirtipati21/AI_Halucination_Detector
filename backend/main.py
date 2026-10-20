@@ -8,6 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from groq import Groq
 
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+GROQ_MODEL = os.getenv("GROQ_MODEL", "openai/gpt-oss-20b")
 
 class ContentRequest(BaseModel):
     content: str
@@ -93,7 +94,7 @@ Content:
     try:
         # Hallucination detection
         response = client.chat.completions.create(
-            model="llama-3.1-8b-instant",
+            model=GROQ_MODEL,
             messages=[
                 {"role": "system", "content": "You detect hallucinations in text."},
                 {"role": "user", "content": prompt}
@@ -107,7 +108,7 @@ Content:
 
         # Fact verification
         fact_response = client.chat.completions.create(
-            model="llama-3.1-8b-instant",
+            model=GROQ_MODEL,
             messages=[
                 {"role": "system", "content": "You verify factual claims."},
                 {"role": "user", "content": fact_prompt}
