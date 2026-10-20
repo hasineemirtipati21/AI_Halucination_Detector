@@ -1,0 +1,57 @@
+.hero {
+  min-height: 100vh;
+  background-color: #fbbf24; /* yellow like image */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 60px 80px;
+  gap: 40px;
+}
+
+.hero-left {
+  max-width: 50%;
+}
+
+.badge {
+  background: black;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.hero-left h1 {
+  font-size: 48px;
+  font-weight: 800;
+  color: #111827;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.hero-left p {
+  font-size: 16px;
+  color: #1f2937;
+  margin-bottom: 30px;
+  max-width: 500px;
+}
+
+.hero-btn {
+  background: #111827;
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.hero-btn:hover {
+  background: #000000;
+}
+
+.hero-right img {
+  width: 420px;
+  max-width: 100%;
+}
