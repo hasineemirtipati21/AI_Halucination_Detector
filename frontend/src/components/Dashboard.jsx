@@ -25,10 +25,13 @@ const Dashboard = () => {
       });
 
       const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.detail || data.error || `Request failed (${response.status})`);
+      }
       setResult(data);
     } catch (error) {
       console.error("Error:", error);
-      alert("Failed to detect content");
+      setResult({ error: error.message || "Could not reach the analysis service." });
     } finally {
       setLoading(false);
     }
@@ -78,6 +81,14 @@ const Dashboard = () => {
 
         {result && !loading && (
           <div className="analysis-box">
+            {result.error ? (
+              <>
+                <h3>Analysis failed</h3>
+                <p>{result.error}</p>
+                <p>Check that the backend has a valid GROQ_API_KEY in its environment settings.</p>
+              </>
+            ) : (
+              <>
             <h3>Analysis Result</h3>
             <p><strong>Hallucination Score:</strong> {result.hallucination_score}%</p>
             <p><strong>Confidence Level:</strong> {result.confidence}%</p>
@@ -140,6 +151,8 @@ const Dashboard = () => {
                 </div>
                 <p>{result.reliability_score}% reliable</p>
               </div>
+            )}
+              </>
             )}
           </div>
         )}
